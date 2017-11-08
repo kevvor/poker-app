@@ -11,6 +11,8 @@ const app         = express();
 
 const morgan      = require('morgan');
 
+const poker = require('./lib/poker.js')
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -26,6 +28,34 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+
+function formatHands(resObj) {
+  const values = Object.values(resObj)
+  const h1 = []
+  const h2 = []
+  const hands = {}
+  let counter = 0
+
+  for (let i = 0; i < values.length; i+=2) {
+    let card = {
+      rank: values[i],
+      suit: values[i+1]
+    }
+    counter++
+
+    if (counter <= 5) {
+      h1.push(card)
+    }
+    else {
+      h2.push(card)
+    }
+  }
+  hands.one = h1;
+  hands.two = h2;
+
+  return hands
+}
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
@@ -34,9 +64,14 @@ app.get("/", (req, res) => {
 // post hands from user
 app.post("/getHands", (req, res) => {
   console.log('posting /getHands')
-  console.log(req.body)
+
+  const formatted = formatHands(req.body)
+
+  poker.compareTwoHands(formatted.one, formatted.two)
+
   res.redirect('/')
 })
+
 
 app.listen(PORT, () => {
   console.log("poker-app listening on port " + PORT);

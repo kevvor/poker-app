@@ -43,12 +43,14 @@ body {
 
       label {
         padding: .5em;
+
       }
       input {
         margin: .5em;
       }
     }
   }
+
   div.suit {
     display: flex;
     flex-direction: row;
@@ -58,7 +60,6 @@ body {
       background-color: #778899;
       margin: .1em .2em;
       padding: 1em;
-
     }
   }
 }
