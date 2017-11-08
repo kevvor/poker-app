@@ -11,9 +11,6 @@ const app         = express();
 
 const morgan      = require('morgan');
 
-// Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -34,6 +31,13 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// post hands from user
+app.post("/getHands", (req, res) => {
+  console.log('posting /getHands')
+  console.log(req.body)
+  res.redirect('/')
+})
+
 app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT);
+  console.log("poker-app listening on port " + PORT);
 });
