@@ -11,7 +11,6 @@ body {
     width: 33%;
     height: 5%;
     background-color: #FFF;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   }
 
   h1 {
@@ -26,9 +25,8 @@ body {
     .hand {
       background-color: #FFF;
       padding: 8px;
-      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
       height: 15%;
-      width: 30%;
+      width: 35%;
       border-radius: 2px;
     }
   }
@@ -42,11 +40,11 @@ body {
       margin: .1em .2em;
 
       label {
-        padding: .5em;
+        padding: .3em;
 
       }
       input {
-        margin: .5em;
+        margin: .3em;
       }
     }
   }
