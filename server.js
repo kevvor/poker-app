@@ -11,6 +11,9 @@ const app         = express();
 
 const morgan      = require('morgan');
 
+const poker = require('./lib/poker.js')
+const formatter = require('./lib/app.js')
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -31,7 +34,7 @@ const helpers = require('./helpers/hands');
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("home");
 });
 
 // post hands from user
@@ -41,6 +44,7 @@ app.post("/getHands", (req, res) => {
   helpers.getRequestData(req.body);
   res.redirect('/')
 })
+
 
 app.listen(PORT, () => {
   console.log("poker-app listening on port " + PORT);

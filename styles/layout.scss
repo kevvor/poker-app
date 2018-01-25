@@ -1,5 +1,17 @@
 body {
   background-color: #EEE;
+  position: relative;
+
+  input.poker-submit {
+    position: absolute;
+    left: 33%;
+    right: 33%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 33%;
+    height: 5%;
+    background-color: #FFF;
+  }
 
   h1 {
     color: #244751;
@@ -11,11 +23,10 @@ body {
     justify-content: space-evenly;
 
     .hand {
-      background-color: white;
+      background-color: #FFF;
       padding: 8px;
-      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
       height: 15%;
-      width: 30%;
+      width: 35%;
       border-radius: 2px;
     }
   }
@@ -25,20 +36,28 @@ body {
     justify-content: space-evenly;
 
     div.radio-background {
-      background-color: tomato;
+      // background-color: #778899;
       margin: .1em .2em;
 
       label {
-        padding: .5em;
+        padding: .3em;
+
       }
       input {
-        margin: .5em;
+        margin: .3em;
       }
     }
   }
+
   div.suit {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+
+    div.radio-background {
+      // background-color: #778899;
+      margin: .1em .2em;
+      padding: 1em;
+    }
   }
 }
