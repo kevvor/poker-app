@@ -26,6 +26,9 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+// Helpers
+const helpers = require('./helpers/hands');
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
@@ -33,8 +36,9 @@ app.get("/", (req, res) => {
 
 // post hands from user
 app.post("/getHands", (req, res) => {
-  console.log('posting /getHands')
   console.log(req.body)
+
+  helpers.getRequestData(req.body);
   res.redirect('/')
 })
 
