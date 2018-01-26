@@ -27,6 +27,7 @@
 
 exports.getRequestData = function(reqBody) {
   const response = [];
+
   const hand1 = [];
   const hand2 = [];
   const values = Object.values(reqBody);
@@ -46,7 +47,6 @@ exports.getRequestData = function(reqBody) {
   }
   response.push(hand1, hand2)
 
-  console.log(response)
   return response;
 }
 
