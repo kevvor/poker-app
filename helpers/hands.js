@@ -27,16 +27,26 @@
 
 exports.getRequestData = function(reqBody) {
   const response = [];
-
+  const hand1 = [];
+  const hand2 = [];
   const values = Object.values(reqBody);
 
   for (let i = 0; i < values.length - 1; i+=2) {
-    response.push({
-      suit: values[i+1],
-      rank: values[i]
-    });
+    if (i < 10) {
+      hand1.push({
+        suit: values[i+1],
+        rank: values[i]
+      });
+    } else {
+      hand2.push({
+        suit: values[i+1],
+        rank: values[i]
+      })
+    }
   }
+  response.push(hand1, hand2)
 
+  console.log(response)
   return response;
 }
 
