@@ -11,110 +11,12 @@ const handValues = {
   card: 14,
 }
 
-const royalFlush = [
-  {suit: 'hearts', rank: 13},
-  {suit: 'hearts', rank: 12},
-  {suit: 'hearts', rank: 11},
-  {suit: 'hearts', rank: 10},
-  {suit: 'hearts', rank: 9}
-]
-
-const straightFlush = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'hearts', rank: 9},
-  {suit: 'hearts', rank: 8},
-  {suit: 'hearts', rank: 7},
-  {suit: 'hearts', rank: 6}
-]
-
-const fourKind = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'diamonds', rank: 10},
-  {suit: 'spades', rank: 10},
-  {suit: 'clubs', rank: 10},
-  {suit: 'hearts', rank: 6}
-]
-
-const onePair = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'clubs', rank: 4},
-  {suit: 'spades', rank: 2},
-  {suit: 'diamonds', rank: 10},
-  {suit: 'hearts', rank: 6}
-]
-
-const twoPair = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'clubs', rank: 4},
-  {suit: 'hearts', rank: 6},
-  {suit: 'diamonds', rank: 10},
-  {suit: 'spades', rank: 4}
-]
-
-const threeKind = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'clubs', rank: 10},
-  {suit: 'hearts', rank: 6},
-  {suit: 'diamonds', rank: 10},
-  {suit: 'spades', rank: 4}
-]
-
-const fullHouse = [
-  {suit: 'hearts', rank: 10},
-  {suit: 'clubs', rank: 10},
-  {suit: 'hearts', rank: 6},
-  {suit: 'diamonds', rank: 10},
-  {suit: 'spades', rank: 6}
-]
-
-function compareTwoHands(hand1, hand2) {
-  const handOne = determineHandValue(hand1)
-  const handTwo = determineHandValue(hand2)
-
-  if (handOne === handTwo) {
-    console.log('tie!')
-  }
-  else if (handOne > handTwo) {
-    console.log('hand one wins!')
-  }
-  else {
-    console.log('hand two wins!')
-  }
-}
-
-function getRandomSuit() {
-  const suit = ['hearts', 'spades', 'diamonds', 'clubs']
-  return suit[Math.floor(Math.random() * suit.length)]
-}
-
-function getRandomRank() {
-  const rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  return rank[Math.floor(Math.random() * rank.length)]
-}
-
-function makeRandomHand() {
-  let newHand = []
-
-  for (let i = 1; i <= 5; i++) { //generate 5 random cards
-    let randomSuit = getRandomSuit()
-    let randomRank = getRandomRank()
-
-    newHand.push({
-      suit: randomSuit,
-      rank: randomRank
-    })
-  }
-  console.log('random hand: ', newHand)
-  return newHand
-}
-
 function byRank(a, b) {
   let comparison = 0
 
   if (a.rank > b.rank) {
     comparison = 1
-  }
-  else if (a.rank < b.rank) {
+  } else if (a.rank < b.rank) {
     comparison = -1
   }
   return comparison
@@ -185,9 +87,6 @@ function checkIfStraight(fiveCardHand) {
   return true
 }
 
-// console.log(checkRoyalFlush(makeRandomHand()))
-// console.log(checkRoyalFlush(royalFlush))
-
 function checkStraightFlush(fiveCardHand) {
   if (!checkIfFlush(fiveCardHand)) {
     return false
@@ -197,9 +96,6 @@ function checkStraightFlush(fiveCardHand) {
   }
   return true
 }
-
-// console.log(checkStraightFlush(straightFlush))
-// console.log(checkStraightFlush(makeRandomHand()))
 
 function checkIfFourKind(fiveCardHand) {
   let rank = 0
@@ -213,9 +109,6 @@ function checkIfFourKind(fiveCardHand) {
   }
   return false
 }
-
-// console.log(checkIfFourKind(makeRandomHand()))
-// console.log(checkIfFourKind(fourKind))
 
 function checkIfThreeKind(fiveCardHand) {
   let rank = 0
@@ -238,8 +131,7 @@ function checkMultiples(fiveCardHand) {
   for (let i = 0; i < fiveCardHand.length; i++) {
     if (!check[fiveCardHand[i].rank]) {
       check[fiveCardHand[i].rank] = 1
-    }
-    else {
+    } else {
       check[fiveCardHand[i].rank] += 1
     }
   }
@@ -247,8 +139,7 @@ function checkMultiples(fiveCardHand) {
   for (let rank in check) {
     if (check[rank] === 2) {
       multiples[rank] = 2
-    }
-    else if (check[rank] === 3) {
+    } else if (check[rank] === 3) {
       multiples[rank] = 3
     }
   }
@@ -259,8 +150,7 @@ function checkIfFullHouse(fiveCardHand) {
   const multiples = Object.values(checkMultiples(fiveCardHand))
   if (multiples.includes(3) && multiples.includes(2)) {
     return true
-  }
-  else {
+   }else {
     return false
   }
 }
@@ -276,8 +166,7 @@ function checkIfTwoPair(fiveCardHand) {
   }
   if (pairs === 2) {
     return true
-  }
-  else {
+  } else {
     return false
   }
 }
@@ -297,45 +186,52 @@ function determineHandValue(cards) {
   if (checkRoyalFlush(cards)) {
     console.log('hand: royal flush')
     return handValues.royalFlush
-  }
-  else if (checkStraightFlush(cards)) {
+  } else if (checkStraightFlush(cards)) {
     console.log('hand: straight flush')
     return handValues.straightFlush
-  }
-  else if (checkIfFourKind(cards)) {
+  } else if (checkIfFourKind(cards)) {
     console.log('hand: four of a kind')
     return handValues.fourKind
-  }
-  else if (checkIfFullHouse(cards)) {
+  } else if (checkIfFullHouse(cards)) {
     console.log('hand: full house')
     return handValues.fullHouse
-  }
-  else if (checkIfFlush(cards)) {
+  } else if (checkIfFlush(cards)) {
     console.log('hand: flush')
     return handValues.flush
-  }
-  else if (checkIfStraight(cards)) {
+  } else if (checkIfStraight(cards)) {
     console.log('hand: straight')
     return handValues.straight
-  }
-  else if (checkIfThreeKind(cards)) {
+  } else if (checkIfThreeKind(cards)) {
     console.log('hand: three of a kind')
     return handValues.threeKind
-  }
-  else if (checkIfTwoPair(cards)) {
+  } else if (checkIfTwoPair(cards)) {
     console.log('hand: two pair')
     return handValues.twoPair
-  }
-  else if (checkIfPair(cards)) {
+  } else if (checkIfPair(cards)) {
     console.log('hand: one pair')
     return handValues.pair
-  }
-  else {
+  } else {
     let highCard = getHighCard(cards)
     console.log('hand: high card')
     return highCard
   }
 }
 
-compareTwoHands(makeRandomHand(), makeRandomHand())
+module.exports = {
+  compareTwoHands: function (hand1, hand2) {
+    const handOne = determineHandValue(hand1)
+    const handTwo = determineHandValue(hand2)
+    const result = {}
 
+    if (handOne === handTwo) {
+      result.case = 'a'
+      return result
+    } else if (handOne > handTwo) {
+      result.case = 'b'
+      return result
+    } else {
+      result.case = 'c'
+      return result
+    }
+  }
+}

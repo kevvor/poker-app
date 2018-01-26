@@ -24,31 +24,30 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
 app.use(express.static("public"));
 
 // Helpers
 const helpers = require('./helpers/hands');
-const poker = require('./lib/poker.js');
+const poker = require('./helpers/poker');
 
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// post hands from user
+// Post hands from user
 app.post("/getHands", (req, res) => {
   const hands = helpers.getRequestData(req.body);
-
   const response = poker.compareTwoHands(hands[0], hands[1]);
-  console.log(response);
 
   if (response.case === 'a') {
     res.send('Tie!');
   } else if (response.case === 'b') {
-    res.send('Hand 2 wins');
+    res.send('Hand 1 wins');
   } else if (response.case === 'c') {
-    res.send('Hand 3 wins');
- } else {
+    res.send('Hand 2 wins');
+  } else {
     res.send('Something went wrong');
  }
 
